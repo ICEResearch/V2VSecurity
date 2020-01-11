@@ -93,23 +93,17 @@ equiv_hotel = 16 - carriers_hotel(:,16)/2;
 equiv_india = 16 - carriers_india(:,16)/2;
 equiv_juliet = 16 - carriers_juliet(:,16)/2;
 
-car_foxtrot = zeros(2330,1);
-car_golf = zeros(2330,1);
-carriers_hotel = zeros(2330,1);
-carriers_india = zeros(2330,1);
-carriers_juliet = zeros(2330,1);
-
-figure();
-hold on;
-grid on;
-plot(equiv_foxtrot);
-plot(equiv_golf);
-plot(equiv_hotel);
-plot(equiv_india);
-plot(equiv_juliet);
-legend('bob', 'eve1', 'eve2', 'eve3', 'eve4');
-xlabel("Alice's Location");
-ylabel('Equivocation in bits');
+% figure();
+% hold on;
+% grid on;
+% plot(equiv_foxtrot);
+% plot(equiv_golf);
+% plot(equiv_hotel);
+% plot(equiv_india);
+% plot(equiv_juliet);
+% legend('bob', 'eve1', 'eve2', 'eve3', 'eve4');
+% xlabel("Alice's Location");
+% ylabel('Equivocation in bits');
 hold off
 
 v2i_snr = logspace(2,3,num_loops_carriers_per_location);
@@ -127,13 +121,6 @@ for index = 1:num_loops_carriers_per_location
 %     end
 end 
 
-carriers_foxtrot = carriers_foxtrot/2;
-carriers_golf = carriers_golf/2;
-carriers_hotel = carriers_hotel/2;
-carriers_india = carriers_india/2;
-carriers_juliet = carriers_juliet/2;
-
-snr = snr(16);
 
 % figure()
 % hold on
@@ -143,9 +130,9 @@ snr = snr(16);
 % plot(carriers_hotel)
 
 
-save('Data/dataForUncodedCase.mat', ...
-    'equiv_foxtrot', 'equiv_golf', 'equiv_hotel', ... 
-    'equiv_india', 'equiv_juliet', 'snr');
+% save('Data/dataForUncodedCase.mat', ...
+%     'equiv_foxtrot', 'equiv_golf', 'equiv_hotel', ... 
+%     'equiv_india', 'equiv_juliet', 'snr');
 
 %%
 
