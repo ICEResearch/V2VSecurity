@@ -2,7 +2,8 @@ close all;
 clear
 addpath('../Functions');
 addpath('../Data');
-load('dataForCodedCases41-correct2.mat');
+% load('dataForCodedCases41-correct2.mat');
+load('dataForCodedCases41.mat');
 
 %expecting a column vector (0-32)
 fakeData1 = ceil(32*rand([4000,1]));
@@ -14,11 +15,11 @@ for j = [16]%1:10:length(snr)
     %move incomming data into variables
     snrIndex = j;
     takeEveryXSamples = 1;
-    carriersPerLocationDataRun1 = carriers_foxtrot(1:takeEveryXSamples:end,snrIndex);
-    carriersPerLocationDataRun2 = carriers_golf(1:takeEveryXSamples:end,snrIndex);
-    carriersPerLocationDataRun3 = carriers_hotel(1:takeEveryXSamples:end,snrIndex);
-    carriersPerLocationDataRun4 = carriers_india(1:takeEveryXSamples:end,snrIndex);
-    carriersPerLocationDataRun5 = carriers_juliet(1:takeEveryXSamples:end,snrIndex);
+    carriersPerLocationDataRun1 = cap_foxtrot(1:takeEveryXSamples:end,snrIndex);
+    carriersPerLocationDataRun2 = cap_golf(1:takeEveryXSamples:end,snrIndex);
+    carriersPerLocationDataRun3 = cap_hotel(1:takeEveryXSamples:end,snrIndex);
+    carriersPerLocationDataRun4 = cap_india(1:takeEveryXSamples:end,snrIndex);
+    carriersPerLocationDataRun5 = cap_juliet(1:takeEveryXSamples:end,snrIndex);
     
     %extract the RM code curves
     r = 2;
