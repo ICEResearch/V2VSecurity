@@ -5,8 +5,8 @@
 
 %% Actual File
 close all
-addpath('../Functions');
-addpath('../Data');
+addpath('Functions');
+addpath('Data');
 load('dataForCodedCases.mat');
 
 syms x;

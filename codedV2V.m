@@ -1,8 +1,7 @@
-close all;
+% close all;
 clear
-addpath('../Functions');
-addpath('../Data');
-% load('dataForCodedCases41-correct2.mat');
+addpath('Functions');
+addpath('Data');
 load('dataForCodedCases41.mat');
 
 %expecting a column vector (0-32)
@@ -63,7 +62,7 @@ for j = [16]%1:10:length(snr)
     revealedBitsAveRun5 = conv(revealedBitsRun5,movingAve);
     
     %plot data
-    figure();%21+j);
+    figure(2);%21+j);
     hold on;
     plot(revealedBitsAveRun1, '-');
     plot(revealedBitsAveRun2, '-');
