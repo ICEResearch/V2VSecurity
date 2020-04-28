@@ -1,6 +1,7 @@
 %% Plots the number of good carriers and unique good carriers for harrison
-%% at each SNR level
-%% Created by Dakota Flanary
+% at each SNR level
+% Note that this method simulates an erasure channel
+% Created by Dakota Flanary
 
 clear;
 close all;
@@ -46,12 +47,12 @@ addpath(genpath('Functions')) % add the functions to this path
 
 
 num_loops = 50; % number of snr values to test
-carriers_alpha = zeros(v2i_num_locations,num_loops); % capacity from the alpha run
-carriers_foxtrot = zeros(v2v_num_locations,num_loops); % capacity from the foxtrot run
-carriers_golf = zeros(v2v_num_locations,num_loops); % capacity from the golf run
-carriers_hotel = zeros(v2v_num_locations,num_loops); % capacity from the hotel run
-carriers_india = zeros(v2v_num_locations,num_loops); % capacity from the india run
-carriers_juliet = zeros(v2v_num_locations,num_loops); % capacity from the juliet run
+cap_alpha = zeros(v2i_num_locations,num_loops); % capacity from the alpha run
+cap_foxtrot = zeros(v2v_num_locations,num_loops); % capacity from the foxtrot run
+cap_golf = zeros(v2v_num_locations,num_loops); % capacity from the golf run
+cap_hotel = zeros(v2v_num_locations,num_loops); % capacity from the hotel run
+cap_india = zeros(v2v_num_locations,num_loops); % capacity from the india run
+cap_juliet = zeros(v2v_num_locations,num_loops); % capacity from the juliet run
 
 snr = logspace(-0,5,num_loops); % snr values to test(in linear)
 % snr = 6.158482110660267e+02;
@@ -62,21 +63,21 @@ threshold = 10^(db_threshold/10); % the threshold to test converted to linear
 % calculate the capacities at different SNR values for each v2v run
 for index = 1:num_loops
     % Find the number of carriers(capacity) of each run at every location
-    carriers_foxtrot(:,index) = find_num_carriers(foxtrot,snr(index),threshold);
-    carriers_golf(:,index) = find_num_carriers(golf,snr(index),threshold);
-    carriers_hotel(:,index) = find_num_carriers(hotel,snr(index),threshold);
-    carriers_india(:,index) = find_num_carriers(india,snr(index),threshold);
-    carriers_juliet(:,index) = find_num_carriers(juliet,snr(index),threshold);
+    cap_foxtrot(:,index) = find_num_carriers(foxtrot,snr(index),threshold);
+    cap_golf(:,index) = find_num_carriers(golf,snr(index),threshold);
+    cap_hotel(:,index) = find_num_carriers(hotel,snr(index),threshold);
+    cap_india(:,index) = find_num_carriers(india,snr(index),threshold);
+    cap_juliet(:,index) = find_num_carriers(juliet,snr(index),threshold);
     
     % code for displaying figures of the capacities
     if iWantFigures && index == 16
         figure()
         hold on
-        plot(carriers_foxtrot(:,index));
-        plot(carriers_golf(:,index));
-        plot(carriers_hotel(:,index));
-        plot(carriers_india(:,index));
-        plot(carriers_juliet(:,index));
+        plot(cap_foxtrot(:,index));
+        plot(cap_golf(:,index));
+        plot(cap_hotel(:,index));
+        plot(cap_india(:,index));
+        plot(cap_juliet(:,index));
         hold off
     end
 end
@@ -87,30 +88,32 @@ for n = 1:nmax
    b_k(n) = 1/nmax; 
 end
 
-equiv_foxtrot = 16 - carriers_foxtrot(:,16)/2;
-equiv_golf = 16 - carriers_golf(:,16)/2;
-equiv_hotel = 16 - carriers_hotel(:,16)/2;
-equiv_india = 16 - carriers_india(:,16)/2;
-equiv_juliet = 16 - carriers_juliet(:,16)/2;
+equiv_foxtrot = 16 - cap_foxtrot(:,16)/2;
+equiv_golf = 16 - cap_golf(:,16)/2;
+equiv_hotel = 16 - cap_hotel(:,16)/2;
+equiv_india = 16 - cap_india(:,16)/2;
+equiv_juliet = 16 - cap_juliet(:,16)/2;
 
-figure();
+figure(2);
 hold on;
 grid on;
-plot(equiv_foxtrot);
-plot(equiv_golf);
-plot(equiv_hotel);
-plot(equiv_india);
-plot(equiv_juliet);
-legend('bob', 'eve1', 'eve2', 'eve3', 'eve4');
-xlabel("Alice's Location");
-ylabel('Equivocation in bits');
+plot(equiv_foxtrot, '--','LineWidth', 1.5);
+plot(equiv_golf, '--', 'LineWidth', 1.5);
+plot(equiv_hotel, '--', 'LineWidth', 1.5);
+plot(equiv_india, '--', 'LineWidth', 1.5);
+plot(equiv_juliet, '--', 'LineWidth', 1.5);
+legend('Bob', 'Eve #1', 'Eve #2', 'Eve #3', 'Eve #4');
+xlabel("Alice's Location (m)");
+ylabel('Equivocation at Eve (bits/channel use)');
+xlim([0 2250])
+xticklabels(["0" "50" "100" "150" "200"]);
 hold off
 
 v2i_snr = logspace(2,3,num_loops_carriers_per_location);
 
 % calculate the capacity for the v2i run at different SNR values 
 for index = 1:num_loops_carriers_per_location
-    carriers_alpha(:,index) = find_num_carriers(alpha,v2i_snr(index),threshold);
+    cap_alpha(:,index) = find_num_carriers(alpha,v2i_snr(index),threshold);
     
     % code for displaying a figure for each SNR value
 %     if (iWantFigures)
@@ -121,23 +124,11 @@ for index = 1:num_loops_carriers_per_location
 %     end
 end 
 
+% save('Data/dataForCodedCases41.mat', 'cap_alpha', 'cap_foxtrot', 'cap_golf', ...
+%     'cap_hotel', 'cap_india', 'cap_juliet', 'snr', 'v2i_snr');
 
-% figure()
-% hold on
-% grid on
-% plot(carriers_foxtrot)
-% plot(carriers_golf)
-% plot(carriers_hotel)
-
-
-% save('Data/dataForUncodedCase.mat', ...
-%     'equiv_foxtrot', 'equiv_golf', 'equiv_hotel', ... 
-%     'equiv_india', 'equiv_juliet', 'snr');
-
-%%
-
-
-
+%% Uncertain what this code is for
+ 
 % % plot the capacities and secrecy capacities
 % snr = 10*log10(snr);
 % figure()

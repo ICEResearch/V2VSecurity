@@ -1,4 +1,6 @@
 % Created by Dakota Flanary
+% Note that the unconstrained gaussian case allows for unlimited channel
+% capacity
 clear;
 close all;
 
@@ -109,6 +111,7 @@ for i = 1:num_loops
     ylabel('Bits per channel use')
     xlabel('location');
     legend('Golf Sec Cap','Hotel Sec Cap','India Sec Cap','Juliet Sec Cap');
+    title({"Capacity", "SNR: " + snr(i)});
     hold off
     
     sgolf_sec_cap(:,i) = conv(golf_sec_cap(:,i),b_k);
@@ -125,6 +128,7 @@ for i = 1:num_loops
     ylabel('Bits per channel use')
     xlabel('location');
     legend('Golf Sec Cap','Hotel Sec Cap','India Sec Cap','Juliet Sec Cap');
+    title({"Capacity, Smoothed", "SNR: " + snr(i)});
     hold off
     
 end

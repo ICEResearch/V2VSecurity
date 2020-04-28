@@ -1,4 +1,6 @@
-
+% Note that the functions V2VGraphableData and V2IGraphableData both rely
+% on raw data files stored on the V2V harddrives, likely stored in the lab
+% computer
 stepSize = 0.1;
 averageWidth = 1;
 
