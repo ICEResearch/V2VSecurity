@@ -33,6 +33,11 @@ List of final figures used in the magazine article and how to generate them:
                     different SNR values)
 
     Figure 9 - V2V Equivocation, Eve, Coded & Uncoded:
-                * Generated in codedV2V.m 
+                * Uncoded was made in threshold_method.m using data generated
+                    in GenerateAveragedData with a length of 41
+                    This also produced dataForCodedCase.mat
+                * Coded was generated in codedV2V.m using dataForCodedCase.mat
                 * SNR of 15.31 (SNR Index 16) was used
+                (Note that figure 9 was the uncoded and coded cases on top of
+                    eachother, which we did not generate ourselves)
 
